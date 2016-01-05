@@ -9,14 +9,14 @@ using MVCDemo.BusinessLayer;
 
 namespace MVCDemo.Controllers
 {
-    public class TestController : Controller
+    public class EmployeeController : Controller
     {
         public string GetString()
         {
             return "Controller Test";
         }
 
-        public ActionResult GetView()
+        public ActionResult Index()
         {
             EmployeeListViewModel employeeListViewModel = new EmployeeListViewModel();
             EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
@@ -38,8 +38,24 @@ namespace MVCDemo.Controllers
                 empViewModels.Add(empViewModel);
             }
             employeeListViewModel.Employees = empViewModels;
-            employeeListViewModel.UserName = "admin";
-            return View("MyView", employeeListViewModel);
+            return View("Index", employeeListViewModel);
+        }
+
+        public ActionResult AddNew()
+        {
+            return View("CreateEmployee");
+        }
+
+        public ActionResult SaveEmployee(Employee e,string BtnSubmit)
+        {
+            switch (BtnSubmit)
+            {
+                case "Save Employee":
+                    return Content(e.FirstName + "|" + e.LastName + "|" + e.Salary);
+                case "Cancel":
+                    return RedirectToAction("Index");
+            }
+            return new EmptyResult();
         }
     }
 }
