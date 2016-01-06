@@ -12,5 +12,25 @@ namespace MVCDemo.BusinessLayer
             SalesERPDAL salesDal = new SalesERPDAL();
             return salesDal.Employees.ToList();
         }
+
+        public Employee SaveEmployee(Employee e)
+        {
+            SalesERPDAL salesDal = new SalesERPDAL();
+            salesDal.Employees.Add(e);
+            salesDal.SaveChanges();
+            return e;
+        }
+
+        public bool IsValidUser(UserDetails u)
+        {
+            if (u.UserName == "admin" && u.Password == "admin")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

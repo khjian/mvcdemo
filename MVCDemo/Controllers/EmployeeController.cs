@@ -9,6 +9,7 @@ using MVCDemo.BusinessLayer;
 
 namespace MVCDemo.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         public string GetString()
@@ -26,7 +27,7 @@ namespace MVCDemo.Controllers
             {
                 EmployeeViewModel empViewModel = new EmployeeViewModel();
                 empViewModel.EmployeeName = emp.FirstName + " " + emp.LastName;
-                empViewModel.Salary = emp.Salary.ToString("C");
+                empViewModel.Salary = emp.Salary.ToString();
                 if (emp.Salary > 15000)
                 {
                     empViewModel.SalaryColor = "yellow";
@@ -43,7 +44,7 @@ namespace MVCDemo.Controllers
 
         public ActionResult AddNew()
         {
-            return View("CreateEmployee");
+            return View("CreateEmployee",new CreateEmployeeViewModel());
         }
 
         public ActionResult SaveEmployee(Employee e,string BtnSubmit)
@@ -51,7 +52,27 @@ namespace MVCDemo.Controllers
             switch (BtnSubmit)
             {
                 case "Save Employee":
-                    return Content(e.FirstName + "|" + e.LastName + "|" + e.Salary);
+                    if (ModelState.IsValid)
+                    {
+                        EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
+                        empBal.SaveEmployee(e);
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        CreateEmployeeViewModel vm = new CreateEmployeeViewModel();
+                        vm.FirstName = e.FirstName;
+                        vm.LastName = e.LastName;
+                        if (e.Salary.HasValue)
+                        {
+                            vm.Salary = e.Salary.ToString();
+                        }
+                        else
+                        {
+                            vm.Salary = ModelState["Salary"].Value.AttemptedValue;
+                        }
+                        return View("CreateEmployee",vm);
+                    }
                 case "Cancel":
                     return RedirectToAction("Index");
             }
