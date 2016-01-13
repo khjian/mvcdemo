@@ -21,15 +21,31 @@ namespace MVCDemo.BusinessLayer
             return e;
         }
 
-        public bool IsValidUser(UserDetails u)
+        //public bool IsValidUser(UserDetails u)
+        //{
+        //    if (u.UserName == "admin" && u.Password == "admin")
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        public UserStatus GetUserValidity(UserDetails u)
         {
             if (u.UserName == "admin" && u.Password == "admin")
             {
-                return true;
+                return UserStatus.AuthenticatedAdmin;
+            }
+            else if (u.UserName == "song" && u.Password == "song")
+            {
+                return UserStatus.AuthentucatedUser;
             }
             else
             {
-                return false;
+                return UserStatus.NonAuthenticatedUser;
             }
         }
     }
