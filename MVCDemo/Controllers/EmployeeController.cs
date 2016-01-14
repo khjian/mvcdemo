@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MVCDemo.Models;
 using MVCDemo.ViewModels;
 using MVCDemo.BusinessLayer;
+using MVCDemo.Filters;
 
 namespace MVCDemo.Controllers
 {
@@ -46,11 +47,18 @@ namespace MVCDemo.Controllers
             return View("Index", employeeListViewModel);
         }
 
+        [AdminFilter]
         public ActionResult AddNew()
         {
+            CreateEmployeeViewModel employeeListViewModel = new CreateEmployeeViewModel();
+            employeeListViewModel.FooterData = new FooterViewModel();
+            employeeListViewModel.FooterData.CompanyName = "StepByStepSchools";//Can be set to dynamic value
+            employeeListViewModel.FooterData.Year = DateTime.Now.Year.ToString();
+            employeeListViewModel.UserName = User.Identity.Name; //New Line
             return View("CreateEmployee",new CreateEmployeeViewModel());
         }
 
+        [AdminFilter]
         public ActionResult SaveEmployee(Employee e,string BtnSubmit)
         {
             switch (BtnSubmit)
@@ -65,6 +73,10 @@ namespace MVCDemo.Controllers
                     else
                     {
                         CreateEmployeeViewModel vm = new CreateEmployeeViewModel();
+                        vm.FooterData = new FooterViewModel();
+                        vm.FooterData.CompanyName = "StepByStepSchools";//Can be set to dynamic value
+                        vm.FooterData.Year = DateTime.Now.Year.ToString();
+                        vm.UserName = User.Identity.Name; //New Line
                         vm.FirstName = e.FirstName;
                         vm.LastName = e.LastName;
                         if (e.Salary.HasValue)

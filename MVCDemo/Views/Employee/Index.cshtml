@@ -1,18 +1,17 @@
 ﻿@using MVCDemo.ViewModels;
 @model EmployeeListViewModel
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/MyLayout.cshtml";
 }
-<div>
-    <div style="text-align:right">
-        Hello, @Model.UserName
-        <a href="/Authentication/Logout">Logout</a>
-        <hr />
+@section TitleSection{
+    MyView
+}
+@section ContentBody{
+    <div>
         @{
             Html.RenderAction("GetAddNewLink");
         }
-    </div>
-        <table>
+        <table border="1">
             <tr>
                 <th>Employee Name</th>
                 <th>Salary</th>
@@ -20,13 +19,10 @@
             @foreach (EmployeeViewModel item in Model.Employees)
             {
                 <tr>
-                    <td> @item.EmployeeName </td>
-                    <td style="background-color:@item.SalaryColor"> @item.Salary </td>
+                    <td>@item.EmployeeName</td>
+                    <td style="background-color:@item.SalaryColor">@item.Salary</td>
                 </tr>
             }
-
         </table>
-    @{
-        Html.RenderPartial("Footer",Model.FooterData);
-     }
-</div>
+    </div>
+}
