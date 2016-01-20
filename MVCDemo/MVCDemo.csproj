@@ -44,14 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -156,13 +148,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BusinessLayer\EmployeeBusinessLayer.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BulkUploadController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
-    <Compile Include="DataAccessLayer\SalesERPDAL.cs" />
     <Compile Include="Filters\AdminFilter.cs" />
     <Compile Include="Filters\EmployeeExceptionFilter.cs" />
     <Compile Include="Filters\HeaderFooterFilter.cs" />
@@ -170,17 +160,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logger\FileLogger.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\FirstNameValidation.cs" />
-    <Compile Include="Models\UserDetails.cs" />
-    <Compile Include="Models\UserStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\CreateEmployeeViewModel.cs" />
-    <Compile Include="ViewModels\EmployeeListViewModel.cs" />
-    <Compile Include="ViewModels\EmployeeViewModel.cs" />
-    <Compile Include="ViewModels\FileUploadViewModel.cs" />
-    <Compile Include="ViewModels\FooterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -242,6 +222,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">
+      <Project>{97ce2b42-7c2e-4174-8374-13811f562018}</Project>
+      <Name>BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
+      <Project>{8a97ebb6-ba29-41b0-ba2d-1ec5dc8e2c94}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{52484d8b-bcba-48eb-be28-d32dc3a6b461}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
