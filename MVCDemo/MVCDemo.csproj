@@ -159,14 +159,17 @@
     <Compile Include="BusinessLayer\EmployeeBusinessLayer.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BulkUploadController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="DataAccessLayer\SalesERPDAL.cs" />
     <Compile Include="Filters\AdminFilter.cs" />
+    <Compile Include="Filters\EmployeeExceptionFilter.cs" />
     <Compile Include="Filters\HeaderFooterFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Logger\FileLogger.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\FirstNameValidation.cs" />
     <Compile Include="Models\UserDetails.cs" />
@@ -230,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -21,17 +21,6 @@ namespace MVCDemo.BusinessLayer
             return e;
         }
 
-        //public bool IsValidUser(UserDetails u)
-        //{
-        //    if (u.UserName == "admin" && u.Password == "admin")
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
 
         public UserStatus GetUserValidity(UserDetails u)
         {
@@ -47,6 +36,13 @@ namespace MVCDemo.BusinessLayer
             {
                 return UserStatus.NonAuthenticatedUser;
             }
+        }
+
+        public void UploadEmployees(List<Employee> employees)
+        {
+            SalesERPDAL salesDal = new SalesERPDAL();
+            salesDal.Employees.AddRange(employees);
+            salesDal.SaveChanges();
         }
     }
 }
